@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  kub-server:
+    build: ./kub-server
+    ports:
+      - '8080:8080'
+
+  kub-web:
+    build: ./kub-web
+    ports:
+      - '3000:3000'

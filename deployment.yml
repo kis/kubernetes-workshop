@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-compose-app
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: my-compose-app
+  template:
+    metadata:
+      labels:
+        app: my-compose-app
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:alpine
+        ports:
+        - containerPort: 5432
+      - name: redis
+        image: "redis:alpine"
+        ports:
+        - containerPort: 6379
+      - name: backend
+        image: */kyryl_stopkin/my-compose-app_backend
+        ports: 
+        - containerPort: 8080
+      - name: web
+        image: */kyryl_stopkin/my-compose-app_web
+        ports:
+        - containerPort: 3000
+      imagePullSecrets:
+        - name: kyryl-stopkin-pull-secret
